@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttackTarget\RandomSingleTarget.cs" />
+    <Compile Include="AttackTarget\SameTypeTarget.cs" />
     <Compile Include="AttackTarget\WholeTarget.cs" />
     <Compile Include="DamageCalculus.cs" />
     <Compile Include="Monster.cs" />

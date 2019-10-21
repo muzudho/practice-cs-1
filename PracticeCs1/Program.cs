@@ -61,6 +61,15 @@
                 Console.WriteLine($@"{monster.Type} {monster.Name} 「２度痛ぇ☆！」");
             });
 
+            // 関数型プログラミング使いこなすと脳汁出てくるよな☆（＾～＾）
+            {
+                var type = (MonsterType)rnd.Next(1, Enum.GetNames(typeof(MonsterType)).Length);
+                SameTypeTarget.Go(monsterList, type, monster =>
+                {
+                    Console.WriteLine($@"{monster.Type} {monster.Name} 「なぜ☆？」");
+                });
+            }
+
             Console.WriteLine("おわり☆　なんか押せだぜ☆（＾～＾）");
             Console.ReadKey();
         }
