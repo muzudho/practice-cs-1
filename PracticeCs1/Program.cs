@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Configuration; // ソリューション・エクスプローラーの参照から System.Configuration.dll をチョイスしろだぜ☆（＾～＾）調べろ☆（＾～＾）
     using System.Linq;
+    using System.Threading;
 
     class Program
     {
@@ -18,6 +19,20 @@
         {
             // 余裕☆（＾～＾）
             Console.WriteLine(ConfigurationManager.AppSettings["urusai"]);
+
+            // BGMがあると盛り上がるよな、無いけど☆（＾～＾）
+            Console.WriteLine("♪チャララ　ラララ　ラ～");
+            Thread.Sleep(400);
+
+            // 無意味な演出☆（＾～＾）
+            Console.WriteLine("♪ドコドン　ドコドン");
+            Thread.Sleep(400);
+
+            Console.WriteLine("♪デッ");
+            Thread.Sleep(400);
+
+            Console.WriteLine("♪デッ");
+            Thread.Sleep(400);
 
             // モンスター・リストとかいう　どうしようもない変数名☆（＾～＾）
             var monsterList = new List<Monster>();
@@ -45,29 +60,43 @@
                     rnd.Next(2, 20)));
             }
 
+            // うざいんで、だんだん短くしようぜ☆（＾～＾）？
+            var waitSec = 400;
             foreach (var monster in monsterList)
             {
-                Console.WriteLine($@"{monster.Type} {monster.Name} が現れた☆（＾～＾）！");
+                Console.WriteLine($@"{monster.Name,-16} が現れた☆（＾～＾）！");
+                Thread.Sleep((int)waitSec);
+                waitSec = (int)Math.Max(20, (float)waitSec * 0.9);
             }
 
+            Console.WriteLine($@"＊「　とりあえず　ぜんいん　たたくか……☆」");
+            waitSec = 400;
             WholeTarget.Go(monsterList, monster=>
             {
-                Console.WriteLine($@"{monster.Type} {monster.Name} 「痛ぇ☆！」");
+                Console.WriteLine($@"ぼかっ！");
+                Console.WriteLine($@"{monster.Name,-16} 「　痛ぇ☆！」");
+                Thread.Sleep((int)waitSec);
+                waitSec = (int)Math.Max(20, (float)waitSec * 0.9);
             });
 
+            Console.WriteLine($@"＊「　これは　おまけの　いっぱつ」");
             // ツイてない洋一。
             RandomSingleTarget.Go(monsterList, rnd, monster=>
             {
-                Console.WriteLine($@"{monster.Type} {monster.Name} 「２度痛ぇ☆！」");
+                Console.WriteLine($@"{monster.Name,-16} 「　２度痛ぇ☆！」");
+                Thread.Sleep(400);
             });
 
             // 関数型プログラミング使いこなすと脳汁出てくるよな☆（＾～＾）
             {
+                Console.WriteLine($@"＊「　くしざし　だぜ☆」");
                 var type = (MonsterType)rnd.Next(1, Enum.GetNames(typeof(MonsterType)).Length);
                 SameTypeTarget.Go(monsterList, type, monster =>
                 {
-                    Console.WriteLine($@"{monster.Type} {monster.Name} 「なぜ☆？」");
+                    Console.WriteLine($@"ぼかっ！");
+                    Console.WriteLine($@"{monster.Name,-16} 「　なぜ☆？」");
                 });
+                Thread.Sleep(400);
             }
 
             Console.WriteLine("おわり☆　なんか押せだぜ☆（＾～＾）");

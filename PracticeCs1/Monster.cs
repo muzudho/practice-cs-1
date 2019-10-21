@@ -16,7 +16,7 @@
         /// <summary>
         /// A とか B とか、みすぼらしい名前だぜ☆（＾～＾）
         /// </summary>
-        public string Name { get; private set; }
+        public string Numbering { get; private set; }
 
         /// <summary>
         /// ３発当たれば死ぬ、とかいう砲撃手から見たカウントが
@@ -28,8 +28,10 @@
         public Monster(MonsterType type, string name, int hitPoint)
         {
             this.Type = type;
-            this.Name = name;
+            this.Numbering = name;
             this.HitPoint = hitPoint;
         }
+
+        public string Name => $@"{this.Type} {this.Numbering}";
     }
 }
