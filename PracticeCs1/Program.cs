@@ -20,18 +20,27 @@
             // 余裕☆（＾～＾）
             Console.WriteLine(ConfigurationManager.AppSettings["urusai"]);
 
+            // メッセージを読込。
+            var messages = new Messages();
+            {
+                messages.Read();
+
+                // テスト表示
+                // messages.Display();
+            }
+
             // BGMがあると盛り上がるよな、無いけど☆（＾～＾）
-            Console.WriteLine("♪チャララ　ラララ　ラ～");
+            Console.WriteLine(string.Format(messages.Get("$Bgm1")));
             Thread.Sleep(400);
 
             // 無意味な演出☆（＾～＾）
-            Console.WriteLine("♪ドコドン　ドコドン");
+            Console.WriteLine(string.Format(messages.Get("$Bgm2")));
             Thread.Sleep(400);
 
-            Console.WriteLine("♪デッ");
+            Console.WriteLine(string.Format(messages.Get("$Bgm3")));
             Thread.Sleep(400);
 
-            Console.WriteLine("♪デッ");
+            Console.WriteLine(string.Format(messages.Get("$Bgm3")));
             Thread.Sleep(400);
 
             // モンスター・リストとかいう　どうしようもない変数名☆（＾～＾）
@@ -64,42 +73,42 @@
             var waitSec = 400;
             foreach (var monster in monsterList)
             {
-                Console.WriteLine($@"{monster.Name,-16} が現れた☆（＾～＾）！");
+                Console.WriteLine(string.Format(messages.Get("$AppearsMonster"), monster.Name));
                 Thread.Sleep((int)waitSec);
                 waitSec = (int)Math.Max(20, (float)waitSec * 0.9);
             }
 
-            Console.WriteLine($@"＊「　とりあえず　ぜんいん　たたくか……☆」");
+            Console.WriteLine(messages.Get("$WholeTarget"));
             waitSec = 400;
             WholeTarget.Go(monsterList, monster=>
             {
-                Console.WriteLine($@"ぼかっ！");
-                Console.WriteLine($@"{monster.Name,-16} 「　痛ぇ☆！」");
+                Console.WriteLine(messages.Get("$Hit"));
+                Console.WriteLine(messages.Get("$HitScream"), monster.Name);
                 Thread.Sleep((int)waitSec);
                 waitSec = (int)Math.Max(20, (float)waitSec * 0.9);
             });
 
-            Console.WriteLine($@"＊「　これは　おまけの　いっぱつ」");
+            Console.WriteLine(messages.Get("$RandomSingleTarget"));
             // ツイてない洋一。
             RandomSingleTarget.Go(monsterList, rnd, monster=>
-            {
-                Console.WriteLine($@"{monster.Name,-16} 「　２度痛ぇ☆！」");
+            {                
+                Console.WriteLine(messages.Get("$RandomSingleTargetScream"), monster.Name);
                 Thread.Sleep(400);
             });
 
             // 関数型プログラミング使いこなすと脳汁出てくるよな☆（＾～＾）
             {
-                Console.WriteLine($@"＊「　くしざし　だぜ☆」");
+                Console.WriteLine(messages.Get("$SameTypeTarget"));
                 var type = (MonsterType)rnd.Next(1, Enum.GetNames(typeof(MonsterType)).Length);
                 SameTypeTarget.Go(monsterList, type, monster =>
                 {
-                    Console.WriteLine($@"ぼかっ！");
-                    Console.WriteLine($@"{monster.Name,-16} 「　なぜ☆？」");
+                    Console.WriteLine(messages.Get("$Hit"));                    
+                    Console.WriteLine(messages.Get("$SameTypeTargetScream"), monster.Name);
                 });
                 Thread.Sleep(400);
             }
 
-            Console.WriteLine("おわり☆　なんか押せだぜ☆（＾～＾）");
+            Console.WriteLine(messages.Get("$GameEndPushAnyKey"));
             Console.ReadKey();
         }
     }

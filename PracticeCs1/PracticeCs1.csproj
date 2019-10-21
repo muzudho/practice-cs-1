@@ -49,6 +49,7 @@
     <Compile Include="AttackTarget\SameTypeTarget.cs" />
     <Compile Include="AttackTarget\WholeTarget.cs" />
     <Compile Include="DamageCalculus.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="MonsterType.cs" />
     <Compile Include="Program.cs" />
@@ -56,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="message.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
