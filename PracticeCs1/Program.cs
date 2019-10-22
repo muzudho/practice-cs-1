@@ -1,10 +1,12 @@
 ﻿namespace PracticeCs1
 {
+    // なんか欲しかったら パッケージを [ツール] - [NuGet パッケージ マネージャー] - [ソリューションの NuGet パッケージの管理] - [参照] を使ってインストールしろだぜ☆（＾～＾）
     using System;
     using System.Collections.Generic;
     using System.Configuration; // ソリューション・エクスプローラーの参照から System.Configuration.dll をチョイスしろだぜ☆（＾～＾）調べろ☆（＾～＾）
     using System.Linq;
     using System.Threading;
+    using System.Threading.Tasks;
 
     class Program
     {
@@ -28,6 +30,10 @@
                 // テスト表示
                 // messages.Display();
             }
+
+            // C#を使った外部スクリプトのテストだぜ☆（＾～＾）
+            RoslynTest.Go();
+
 
             // BGMがあると盛り上がるよな、無いけど☆（＾～＾）
             Console.WriteLine(string.Format(messages.Get("$Bgm1")));
