@@ -25,7 +25,8 @@
             // メッセージを読込。
             var messages = new Messages();
             {
-                messages.Read();
+                // bin/Release/PracticeCs1.exe から見るとディレクトリは２つ上。
+                messages.Read("../../message.txt");
 
                 // テスト表示
                 // messages.Display();
