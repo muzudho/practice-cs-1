@@ -7,21 +7,25 @@
     using System.Text.RegularExpressions;
 
     /// <summary>
-    /// 外部メッセージ・テキスト・ファイルを読み込むぜ☆（＾～＾）
+    /// いわゆる message.txt １個分の内容だぜ☆（＾～＾）ファイル名に特に決まりはない☆（＾～＾）
+    /// 読み取り専用になっていることに気づけだぜ☆ｍ９（＾～＾）
+    /// カプセル化という言葉だけ知っていても実践しなければ意味はない☆（＾～＾）プロパティを public ばっかにしてんだろ☆（＾～＾）
     /// </summary>
-    public class Messages
+    public class MessageDocument
     {
-        public Dictionary<string, string> Items { get; private set; }
+        private Dictionary<string, string> Items { get; set; }
 
-        public Messages()
+        private MessageDocument()
         {
             this.Items = new Dictionary<string, string>();
         }
 
-        public void Read(string pathFromExe)
+        public static MessageDocument Read(string pathFromExe)
         {
+            var instance = new MessageDocument();
+
             // 何回もリードするだろ☆（＾～＾）残っているデータは消しておこうぜ☆（＾～＾）
-            this.Items.Clear();
+            instance.Items.Clear();
 
             var key = string.Empty;
             var textLines = new List<string>();
@@ -48,7 +52,7 @@
                         // 確定。
                         // 出力ウィンドウに出すぜ☆（＾～＾）
                         Trace.WriteLine($"Key             | {line}");
-                        EnterText(key, textLines, replacesDict);
+                        instance.EnterText(key, textLines, replacesDict);
                     }
 
                     // キー変更。頭の $ ごと入れる。
@@ -107,18 +111,27 @@
                 // 最後の読み取り中のものを確定。
                 // 出力ウィンドウに出すぜ☆（＾～＾）
                 Trace.WriteLine($"Info            | Enter last message.");
-                EnterText(key, textLines, replacesDict);
+                instance.EnterText(key, textLines, replacesDict);
             }
+
+            return instance;
         }
 
-        public string Get(string key)
+        /// <summary>
+        /// 見つからなかったときにヌルを返すのはバグが見つからない元だぜ☆（＾～＾）
+        /// Tupleを使おうぜ☆（＾～＾）使えなかったら NuGet から System.ValueTuple を探してこいだぜ☆（＾～＾）
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public (bool, string) GetValue(string key)
         {
             if (this.Items.ContainsKey(key))
             {
-                return this.Items[key];
+                return (true, this.Items[key]);
             }
 
-            return $@"Unknown ID: {key}";
+            // テストするときに、何が起こったのか分かった方が助かるだろ☆（＾～＾）
+            return (false, $@"Unknown ID: {key}");
         }
 
         /// <summary>
@@ -128,8 +141,9 @@
         {
             foreach (var entry in this.Items)
             {
-                Console.WriteLine(entry.Key);
-                Console.WriteLine(entry.Value);
+                // 出力ウィンドウに出した方がありがたいだろ☆（＾～＾）
+                Trace.WriteLine(entry.Key);
+                Trace.WriteLine(entry.Value);
             }
         }
 

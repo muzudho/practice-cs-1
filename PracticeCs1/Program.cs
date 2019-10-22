@@ -25,8 +25,10 @@
             // メッセージを読込。
             var messages = new Messages();
             {
-                // bin/Release/PracticeCs1.exe から見るとディレクトリは２つ上。
-                messages.Read("../../message.txt");
+                // ファイル名なんか指定していたら日がくれる☆（＾～＾）ディレクトリー名を指定して、あとは勝手に探すようにしろだぜ☆（＾～＾）
+                // GitHub に置かれるときのことを考えている☆（＾～＾）
+                // bin/Release/PracticeCs1.exe から見るとディレクトリは３つ上。
+                messages.ReadFromDirectory("../../../");
 
                 // テスト表示
                 // messages.Display();

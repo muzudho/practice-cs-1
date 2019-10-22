@@ -89,7 +89,8 @@
     <Compile Include="AttackTarget\SameTypeTarget.cs" />
     <Compile Include="AttackTarget\WholeTarget.cs" />
     <Compile Include="DamageCalculus.cs" />
-    <Compile Include="Messages.cs" />
+    <Compile Include="MessageEngine\MessageDocument.cs" />
+    <Compile Include="MessageEngine\Messages.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="MonsterType.cs" />
     <Compile Include="Program.cs" />
@@ -101,7 +102,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="message.txt" />
+    <Content Include="Resources\Messages\hero-talk.txt" />
+    <Content Include="Resources\Messages\bgm.txt" />
+    <Content Include="Resources\Messages\monster-talk.txt" />
+    <Content Include="Resources\Messages\omake.txt" />
+    <Content Include="Resources\Messages\sound.txt" />
+    <Content Include="Resources\Messages\system-message.txt" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
