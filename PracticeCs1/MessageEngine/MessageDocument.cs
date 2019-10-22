@@ -137,7 +137,7 @@
         /// <summary>
         /// デバッグ表示。
         /// </summary>
-        public void Display()
+        public void DisplayToTrace()
         {
             foreach (var entry in this.Items)
             {

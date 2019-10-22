@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
-    using System.Text.RegularExpressions;
 
     /// <summary>
     /// 外部メッセージ・テキスト・ファイルを読み込むぜ☆（＾～＾）
@@ -47,6 +45,26 @@
         }
 
         /// <summary>
+        /// 可変長引数めんどくさいよな☆（＾～＾）
+        /// あとで外部スクリプトで使うことを考えるとメソッド名は短い方がいいんだが、
+        /// 慣用に従ってた方が指が動いてくれるというのもある☆（＾～＾）
+        /// </summary>
+        /// <param name="key"></param>
+        public void WriteBy(string key, params string[] args)
+        {
+            try
+            {
+                Console.WriteLine(string.Format(this.Get(key), args));
+            }
+            catch (FormatException e)
+            {
+                // 台詞にうっかり `{` を付けちゃったりすると強制終了してしまう☆（＾～＾）これはひどい仕様だぜ☆（＾～＾）
+                // 書式エラーはとりあえず画面に出してしまおう☆（＾～＾）強制終了よりマシ☆（＾～＾）
+                Console.WriteLine(e);
+            }
+        }
+
+        /// <summary>
         /// 大量に使うからメソッド名は短くしているが、あんま良くない☆（＾～＾）
         /// </summary>
         /// <param name="key"></param>
@@ -69,11 +87,11 @@
         /// <summary>
         /// デバッグ表示。全ファイル分出る☆（＾～＾）このメソッドを使うやつはやばい☆（＾～＾）
         /// </summary>
-        public void Display()
+        public void DisplayToTrace()
         {
             foreach (var doc in this.Documents.Values)
             {
-                doc.Display();
+                doc.DisplayToTrace();
             }
         }
     }

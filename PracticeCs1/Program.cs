@@ -6,7 +6,6 @@
     using System.Configuration; // ソリューション・エクスプローラーの参照から System.Configuration.dll をチョイスしろだぜ☆（＾～＾）調べろ☆（＾～＾）
     using System.Linq;
     using System.Threading;
-    using System.Threading.Tasks;
 
     class Program
     {
@@ -23,33 +22,58 @@
             Console.WriteLine(ConfigurationManager.AppSettings["urusai"]);
 
             // メッセージを読込。
-            var messages = new Messages();
+            var msg = new Messages();
             {
                 // ファイル名なんか指定していたら日がくれる☆（＾～＾）ディレクトリー名を指定して、あとは勝手に探すようにしろだぜ☆（＾～＾）
                 // GitHub に置かれるときのことを考えている☆（＾～＾）
                 // bin/Release/PracticeCs1.exe から見るとディレクトリは３つ上。
-                messages.ReadFromDirectory("../../../");
-
-                // テスト表示
-                // messages.Display();
+                msg.ReadFromDirectory("../../../");
             }
 
-            // C#を使った外部スクリプトのテストだぜ☆（＾～＾）
-            RoslynTest.Go();
+            // ここらへんテストばっか☆（＾～＾）
+            {
+                // テスト表示
+                // msg.DisplayToTrace();
+
+                // C#を使った外部スクリプトのテストだぜ☆（＾～＾）
+                RoslynTest.Go();
+
+                // 引数が何個ぐらい使えるかのテストだぜ☆（＾～＾）
+                msg.WriteBy(
+                    "$ParamsTest",
+                    "ゼロ",
+                    "いちじく",
+                    "にんじん",
+                    "さんま",
+                    "しいたけ",
+                    "ごぼう",
+                    "ろくってなんだ",
+                    "ななくさ",
+                    "はち",
+                    "きゅう",
+                    "じゅう",
+                    "イレブン",
+                    "トゥエルブ",
+                    "サーティーン",
+                    "じゅうしまつ",
+                    "フィフティーン");
+                Thread.Sleep(400);
+            }
 
 
             // BGMがあると盛り上がるよな、無いけど☆（＾～＾）
-            Console.WriteLine(string.Format(messages.Get("$Bgm1")));
+            msg.WriteBy("$Bgm1");
             Thread.Sleep(400);
 
             // 無意味な演出☆（＾～＾）
-            Console.WriteLine(string.Format(messages.Get("$Bgm2")));
+            // こういう演出を　外部スクリプトに出せだぜ☆（＾～＾）！
+            msg.WriteBy("$Bgm2");
             Thread.Sleep(400);
 
-            Console.WriteLine(string.Format(messages.Get("$Bgm3")));
+            msg.WriteBy("$Bgm3");
             Thread.Sleep(400);
 
-            Console.WriteLine(string.Format(messages.Get("$Bgm3")));
+            msg.WriteBy("$Bgm3");
             Thread.Sleep(400);
 
             // モンスター・リストとかいう　どうしようもない変数名☆（＾～＾）
@@ -82,42 +106,42 @@
             var waitSec = 400;
             foreach (var monster in monsterList)
             {
-                Console.WriteLine(string.Format(messages.Get("$AppearsMonster"), monster.Name));
+                msg.WriteBy("$AppearsMonster", monster.Name);
                 Thread.Sleep((int)waitSec);
                 waitSec = (int)Math.Max(20, (float)waitSec * 0.9);
             }
 
-            Console.WriteLine(messages.Get("$WholeTarget"));
+            msg.WriteBy("$WholeTarget");
             waitSec = 400;
-            WholeTarget.Go(monsterList, monster=>
+            WholeTarget.Go(monsterList, monster =>
             {
-                Console.WriteLine(messages.Get("$Hit"));
-                Console.WriteLine(messages.Get("$HitScream"), monster.Name);
+                msg.WriteBy("$Hit");
+                msg.WriteBy("$HitScream", monster.Name);
                 Thread.Sleep((int)waitSec);
                 waitSec = (int)Math.Max(20, (float)waitSec * 0.9);
             });
 
-            Console.WriteLine(messages.Get("$RandomSingleTarget"));
+            msg.WriteBy("$RandomSingleTarget");
             // ツイてない洋一。
-            RandomSingleTarget.Go(monsterList, rnd, monster=>
-            {                
-                Console.WriteLine(messages.Get("$RandomSingleTargetScream"), monster.Name);
+            RandomSingleTarget.Go(monsterList, rnd, monster =>
+            {
+                msg.WriteBy("$RandomSingleTargetScream", monster.Name);
                 Thread.Sleep(400);
             });
 
             // 関数型プログラミング使いこなすと脳汁出てくるよな☆（＾～＾）
             {
-                Console.WriteLine(messages.Get("$SameTypeTarget"));
+                msg.WriteBy("$SameTypeTarget");
                 var type = (MonsterType)rnd.Next(1, Enum.GetNames(typeof(MonsterType)).Length);
                 SameTypeTarget.Go(monsterList, type, monster =>
                 {
-                    Console.WriteLine(messages.Get("$Hit"));                    
-                    Console.WriteLine(messages.Get("$SameTypeTargetScream"), monster.Name);
+                    msg.WriteBy("$Hit");
+                    msg.WriteBy("$SameTypeTargetScream", monster.Name);
                 });
                 Thread.Sleep(400);
             }
 
-            Console.WriteLine(messages.Get("$GameEndPushAnyKey"));
+            msg.WriteBy("$GameEndPushAnyKey");
             Console.ReadKey();
         }
     }

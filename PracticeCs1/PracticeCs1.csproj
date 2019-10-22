@@ -102,14 +102,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Messages\hero-talk.txt" />
-    <Content Include="Resources\Messages\bgm.txt" />
-    <Content Include="Resources\Messages\monster-talk.txt" />
-    <Content Include="Resources\Messages\omake.txt" />
-    <Content Include="Resources\Messages\sound.txt" />
-    <Content Include="Resources\Messages\system-message.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.2.9.4\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
