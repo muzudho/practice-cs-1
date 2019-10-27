@@ -89,6 +89,7 @@
     <Compile Include="AttackTarget\SameTypeTarget.cs" />
     <Compile Include="AttackTarget\WholeTarget.cs" />
     <Compile Include="DamageCalculus.cs" />
+    <Compile Include="FileSystem\SearchesDirectory.cs" />
     <Compile Include="MessageEngine\MessageDocument.cs" />
     <Compile Include="MessageEngine\Messages.cs" />
     <Compile Include="Monster.cs" />

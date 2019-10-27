@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Generic;
     using System.Configuration; // ソリューション・エクスプローラーの参照から System.Configuration.dll をチョイスしろだぜ☆（＾～＾）調べろ☆（＾～＾）
+    using System.IO;
     using System.Linq;
     using System.Threading;
 
@@ -27,7 +28,15 @@
                 // ファイル名なんか指定していたら日がくれる☆（＾～＾）ディレクトリー名を指定して、あとは勝手に探すようにしろだぜ☆（＾～＾）
                 // GitHub に置かれるときのことを考えている☆（＾～＾）
                 // bin/Release/PracticeCs1.exe から見るとディレクトリは３つ上。
-                msg.ReadFromDirectory("../../../");
+                SearchesDirectory.Go("../../../", (string fileEntry)=>
+                {
+                    // entry は、ファイルのフルパス☆（＾～＾）
+                    // 圧縮ファイル読み込んでも嫌だよな☆（＾～＾） 拡張子は .txt （大文字小文字を区別しない）にしておこうぜ☆（＾～＾）
+                    if (Path.GetExtension(fileEntry).ToUpper() == ".TXT")
+                    {
+                        msg.Documents.Add(fileEntry, MessageDocument.Read(fileEntry));
+                    }
+                });
             }
 
             // ここらへんテストばっか☆（＾～＾）
