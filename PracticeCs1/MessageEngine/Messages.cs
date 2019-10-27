@@ -48,9 +48,12 @@
         /// 可変長引数めんどくさいよな☆（＾～＾）
         /// あとで外部スクリプトで使うことを考えるとメソッド名は短い方がいいんだが、
         /// 慣用に従ってた方が指が動いてくれるというのもある☆（＾～＾）
+        /// 
+        /// コンパイラが書式チェックしてくれない弱点があるぜ☆（＾～＾）
+        /// ReSharperでも使ってれば アノテーションを付ければ良さそうだが☆（＾～＾）
         /// </summary>
         /// <param name="key"></param>
-        public void WriteBy(string key, params string[] args)
+        public void WriteBy(string key, params object[] args)
         {
             try
             {
