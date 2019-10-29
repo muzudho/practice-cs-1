@@ -24,9 +24,6 @@
         {
             var instance = new MessageDocument();
 
-            // 何回もリードするだろ☆（＾～＾）残っているデータは消しておこうぜ☆（＾～＾）
-            instance.Items.Clear();
-
             var key = string.Empty;
             var textLines = new List<string>();
 
@@ -82,7 +79,7 @@
                         Console.WriteLine($"なんか分からん行だなあ☆（＾～＾）| Separator=[{separator}] body=[{body}] TokenLength={tokens.Length} Line=[{line}].");
                     }
                 }
-                else if (line.Trim() == string.Empty)
+                else if (string.IsNullOrWhiteSpace(line))
                 {
                     // 空行は無視するぜ☆（＾～＾）
 

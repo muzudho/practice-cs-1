@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
 
     /// <summary>
@@ -24,22 +25,22 @@
         {
             // ファイルを探せだぜ☆（＾～＾）
             var entries = Directory.GetFileSystemEntries(directoryFromExe);
-            foreach (var entry in entries)
+            foreach (var fileEntry in entries)
             {
-                if (File.Exists(entry))
+                if (File.Exists(fileEntry))
                 {
                     // entry は、ファイルのフルパス☆（＾～＾）
                     // 圧縮ファイル読み込んでも嫌だよな☆（＾～＾） 拡張子は .txt （大文字小文字を区別しない）にしておこうぜ☆（＾～＾）
-                    if(Path.GetExtension(entry).ToUpper() == ".TXT")
+                    if (System.IO.Path.GetExtension(fileEntry).ToUpper(CultureInfo.CurrentCulture) == ".TXT")
                     {
-                        this.Documents.Add(entry, MessageDocument.Read(entry));
+                        this.Documents.Add(fileEntry, MessageDocument.Read(fileEntry));
                     }
                 }
                 else
                 {
                     // これが　お馴染みの再帰関数だぜ☆（＾～＾）！
                     // ディレクトリーの中に　ごちゃごちゃ　ファイル入れてんなよ☆（＾～＾）
-                    ReadFromDirectory(entry);
+                    ReadFromDirectory(fileEntry);
                 }
             }
         }

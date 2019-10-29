@@ -27,8 +27,8 @@
             {
                 // ファイル名なんか指定していたら日がくれる☆（＾～＾）ディレクトリー名を指定して、あとは勝手に探すようにしろだぜ☆（＾～＾）
                 // GitHub に置かれるときのことを考えている☆（＾～＾）
-                // bin/Release/PracticeCs1.exe から見るとディレクトリは３つ上。
-                SearchesDirectory.Go("../../../", (string fileEntry)=>
+                // visual-studio/PracticeCs1/bin/Release/PracticeCs1.exe から見ると Resources ディレクトリは４つ上。
+                SearchesDirectory.Go("../../../../Resources", (string fileEntry)=>
                 {
                     // entry は、ファイルのフルパス☆（＾～＾）
                     // 圧縮ファイル読み込んでも嫌だよな☆（＾～＾） 拡張子は .txt （大文字小文字を区別しない）にしておこうぜ☆（＾～＾）
